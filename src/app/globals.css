@@ -2,20 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #171717;
+    --foreground: #ffffff;
+    --primary: #89c2d9;
+    --secondary: #a8b4d3;
+    --header-footer-bg: #0f172a;
+    --accent: #22d3ee;
+    --shadow: rgba(255, 255, 255, 0.1);
   }
 }
 
 body {
+  background-color: var(--background);
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.main-content {
+  padding: 16px;
+}
+
+.map-container {
+  box-shadow: 0 4px 6px var(--shadow);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+select {
+  font-size: 14px;
+}
+
+header {
+  background-color: var(--foreground);
+  color: var(--background);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+  background-color: var(--foreground);
+  color: var(--background);
+  padding: 16px;
+  text-align: center;
+}
+
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--primary);
+  color: var(--background);
+}
+.scroll-to-top {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background-color: var(--accent);
+  color: var(--background);
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 4px 6px var(--shadow);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.scroll-to-top:hover {
+  transform: scale(1.1);
+}
+
+.map-container:hover, footer:hover {
+  box-shadow: 0 6px 8px var(--shadow);
 }

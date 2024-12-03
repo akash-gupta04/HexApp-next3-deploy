@@ -1,101 +1,91 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import dynamic from "next/dynamic";
+import { useState, useContext } from "react";
+import { MapStyleContext } from "./layout";
+
+const Map = dynamic(() => import("./components/Map"), { ssr: false });
+
+export default function Page() {
+  const { mapStyle } = useContext(MapStyleContext);
+  const [selectedHexes, setSelectedHexes] = useState<string[]>([]);
+  const [resolution, setResolution] = useState(5);
+
+  const hexagonAreaPerResolution = [
+    4357449, // km² at resolution 0
+    1538395,
+    219017,
+    31359,
+    4479,
+    639,
+    91,
+    13,
+    2,
+    0.3,
+    0.04, // km² at resolution 10
+  ];
+
+  const totalSelectedArea = selectedHexes.length * hexagonAreaPerResolution[resolution];
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="p-4">
+      {/* Resolution Selector */}
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center">
+          <label htmlFor="resolution" className="mr-2 font-medium">
+            Hexagon Size:
+          </label>
+          <select
+            id="resolution"
+            value={resolution}
+            onChange={(e) => setResolution(Number(e.target.value))}
+            className="p-2 border rounded"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            {Array.from({ length: 11 }, (_, i) => (
+              <option key={i} value={i}>
+                Resolution {i}
+              </option>
+            ))}
+          </select>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <p className="text-sm text-gray-600">
+          <strong>Approx. Area per Hex:</strong>{" "}
+          <span className="mt-2 text-gray-700">
+            {hexagonAreaPerResolution[resolution].toLocaleString()} km²
+          </span>
+        </p>
+      </div>
+
+      {/* Map Section */}
+      <div className="w-full h-[500px] shadow-md rounded-md overflow-hidden">
+        <Map
+          onHexSelect={(hexes) => {
+            setSelectedHexes(hexes);
+          }}
+          mapStyle={mapStyle}
+          resolution={resolution}
+        />
+      </div>
+
+      {/* Selected Hexagons and Approximate Area */}
+      <div className="mt-4 p-4 bg-gray-100 rounded shadow">
+        <h2 className="text-lg font-bold">Selected Hexagons:</h2>
+        <textarea
+          value={selectedHexes.join(", ")}
+          onChange={(e) => {
+            const updatedHexes = e.target.value
+              .split(",")
+              .map((hex) => hex.trim())
+              .filter((hex) => hex !== ""); // Remove empty entries
+            setSelectedHexes(updatedHexes);
+          }}
+          className="w-full p-2 border rounded font-mono text-sm h-28 resize-none overflow-y-auto"
+        />
+        <p className="mt-2 text-gray-700">
+          <strong>Total Approx. Area:</strong>{" "}
+          <span className="">{totalSelectedArea.toLocaleString()} km²</span>
+        </p>
+      </div>
+    </main>
   );
 }
