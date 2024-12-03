@@ -7,7 +7,7 @@ This is a Hex Map Application built with React and Next.js, utilizing Mapbox for
 - Interactive map with hexagon selection.
 - Toggle between light and satellite map styles.
 - Display of selected hexagons in an editable text area.
-- Calculation of approximate area covered by selected hexagons.
+- Calculate the approximate area covered by selected hexagons.
 - Responsive layout with smooth scrolling.
 - Scroll-to-top button for user convenience.
 
@@ -33,14 +33,14 @@ Follow these steps to set up and run the project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/hex-map-application.git
+   git clone https://github.com/akash-gupta04/Project1.git
    cd hex-map-application
 2. Install dependencies:
    '''bash
    npm install
 3. Add a .env.local file in the root of the project with your Mapbox access token:
    '''bash
-    NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_access_token
-4.Run the server
+   NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_access_token
+4. Run the server
    '''bash
-  npm run dev
+   npm run dev
