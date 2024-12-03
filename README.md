@@ -40,7 +40,8 @@ Follow these steps to set up and run the project locally:
    npm install
 3. Add a .env.local file in the root of the project with your Mapbox access token:
    '''bash
-   NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_access_token
-4. Run the server
+   npm install
+5. 
+6. Run the server
    '''bash
    npm run dev
