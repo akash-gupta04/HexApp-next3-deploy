@@ -36,12 +36,12 @@ Follow these steps to set up and run the project locally:
    git clone https://github.com/akash-gupta04/Project1.git
    cd hex-map-application
 2. Install dependencies:
-   '''bash
+   ```bash
    npm install
 3. Add a .env.local file in the root of the project with your Mapbox access token:
-   '''bash
+    ```bash
    npm install
-5. 
+   
 6. Run the server
-   '''bash
+    ```bash
    npm run dev
