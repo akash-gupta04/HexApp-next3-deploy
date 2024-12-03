@@ -1,4 +1,4 @@
-# Hex Map Application
+# Hex Map App
 
 This is a Hex Map Application built with React and Next.js, utilizing Mapbox for map rendering and H3 for hexagonal grid calculations. The app allows users to select hexagons on the map, view the selected hexagons' IDs, and calculate their approximate total area based on the resolution.
 
