@@ -33,7 +33,7 @@ Follow these steps to set up and run the project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/akash-gupta04/Project1.git
+   git clone https://github.com/akash-gupta04/HexApp.git
    cd hex-map-application
 2. Install dependencies:
    ```bash
