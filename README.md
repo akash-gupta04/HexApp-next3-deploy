@@ -37,7 +37,10 @@ Follow these steps to set up and run the project locally:
    cd hex-map-application
 2. Install dependencies:
    ```bash
-   npm install
+   npm install react react-dom next
+   npm install -D eslint eslint-config-next typescript @types/react @types/node
+   npm install mapbox-gl react-map-gl
+   
 3. Add a .env.local file in the root of the project with your Mapbox access token:
     ```bash
    npm install
