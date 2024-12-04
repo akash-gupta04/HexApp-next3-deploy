@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import MapGL, { MapRef, Source, Layer } from "react-map-gl";
-import mapboxgl from "mapbox-gl";
 import * as H3 from "h3-js";
 
 interface MapProps {
