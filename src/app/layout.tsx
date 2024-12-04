@@ -1,14 +1,13 @@
 "use client";
 
 import "./globals.css";
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { MapStyleContext } from "./components/MapStyle";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [mapStyle, setMapStyle] = useState("mapbox://styles/mapbox/light-v11");
   const [showScroll, setShowScroll] = useState(false);
 
-  // Toggle map styles between light and satellite
   const toggleMapStyle = () => {
     setMapStyle((prevStyle) =>
       prevStyle === "mapbox://styles/mapbox/light-v11"
