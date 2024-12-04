@@ -2,12 +2,7 @@
 
 import "./globals.css";
 import React, { useState, createContext, useEffect } from "react";
-
-// Create a context to share map style globally
-export const MapStyleContext = createContext({
-  mapStyle: "mapbox://styles/mapbox/light-v11",
-  toggleMapStyle: () => {},
-});
+import { MapStyleContext } from "./components/MapStyle";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [mapStyle, setMapStyle] = useState("mapbox://styles/mapbox/light-v11");

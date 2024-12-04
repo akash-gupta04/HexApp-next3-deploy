@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useState, useContext } from "react";
-import { MapStyleContext } from "./layout";
+import { MapStyleContext } from "./components/MapStyle";
 
 const Map = dynamic(() => import("./components/Map"), { ssr: false });
 
