@@ -48,3 +48,7 @@ Follow these steps to set up and run the project locally:
 6. Run the server
     ```bash
    npm run dev
+
+### Deployment
+Deployed on Vercel
+Checkout!! the HexApp on https://hexapp.vercel.app/
